@@ -1,0 +1,45 @@
+exp_name: test_pcb1_retrain
+train_root: /hcds_vol/private/NCU/william/VisA_20220922/pcb1/fewshot/train.csv
+val_root: /hcds_vol/private/NCU/william/VisA_20220922/pcb1/fewshot/test.csv
+image_root: /hcds_vol/private/NCU/william/VisA_20220922
+randomsampler: false
+randomsampler_num: 200
+model_name: swin-b
+use_pretrained_backbone: true
+pretrained: null
+data_size: 384
+num_workers: 8
+batch_size: 20
+max_epochs: 100
+optimizer: SGD
+max_lr: 0.0005
+wdecay: 0.0003
+warmup_batchs: 1500
+use_amp: true
+use_fpn: true
+fpn_size: 1536
+use_selection: true
+num_classes: 5
+num_selects:
+  layer1: 256
+  layer2: 128
+  layer3: 64
+  layer4: 32
+use_combiner: true
+lambda_b0: 1.375
+lambda_b: 0.3
+lambda_s: 0.0
+lambda_n: 5.0
+lambda_c: 1.0
+update_freq: 4
+log_freq: 100
+eval_freq: 10
+temperature: 64
+best_cls: combiner-top-1
+eval_model: ./records/test_pcb1_retrain
+target_name:
+- normal
+- bent
+- melt
+- missing
+- scratch
